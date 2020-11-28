@@ -1,13 +1,11 @@
-const express = require('express');
-
-const app = express();
-
+const mongoose = require('mongoose');
+const app = require('./app');
 const port = process.env.PORT || 8080;
 
-app.get('*', (req, res) => {
-    res.status(404).send({message: 'Page not exists'});
-})
+async function start(){
+    app.listen(port, () => {
+        console.log('Listening on port ' + port);
+    });
+}
 
-app.listen(port, () => {
-    console.log('listening on port ' + port);
-});
+start();
