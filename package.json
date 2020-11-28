@@ -8,14 +8,17 @@
     "cookie-session": "^1.4.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "mongo-uri": "^0.1.2",
     "mongodb": "^3.6.3",
     "mongoose": "^5.10.17",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.6"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
