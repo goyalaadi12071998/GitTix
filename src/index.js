@@ -7,7 +7,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/hello', (req, res) => {
-    res.send('Hello World!!!!!!!!!!!!!!!!!');
+    res.send(process.env.KNOW_VALUE);
 })
 
 const port = process.env.PORT || 8080;
