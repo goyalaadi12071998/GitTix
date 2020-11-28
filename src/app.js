@@ -11,11 +11,6 @@ app.set(bodyParser.urlencoded({ extended: true }));
 app.use(morgan());
 app.use(cors());
 
-
-app.get('/', (req, res) => {
-    res.send('Listening');
-})
-
 app.all('*', (req, res) => {
     res.status(404).send({message: 'Page not exists'});
 });

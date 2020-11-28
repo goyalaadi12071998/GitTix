@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const app = require('./app');
 const port = process.env.PORT || 8080;
+const db = require('./config/db/db');
 
 async function start(){
     if(process.env.NODE_ENV === 'production') {
@@ -11,12 +12,8 @@ async function start(){
 
     try{
 
-        await mongoose.connect(process.env.MONGODB_URI,{
-            useCreateIndex: true,
-            useUnifiedTopology: true,
-            useNewUrlParser: true
-        });
-
+        await db.initDb(db);
+        
         app.listen(port, () => {
             console.log('Listening on port ' + port);
         });
