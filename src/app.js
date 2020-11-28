@@ -4,12 +4,13 @@ const morgan = require('morgan');
 const cookieSession = require('cookie-session');
 const cors = require('cors');
 
+const app = express();
+
 app.set(bodyParser.urlencoded({ extended: true }));
 
 app.use(morgan());
 app.use(cors());
 
-const app = express();
 
 app.get('/', (req, res) => {
     res.send('Listening');
