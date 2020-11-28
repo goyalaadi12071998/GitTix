@@ -2,15 +2,11 @@ const express = require('express');
 
 const app = express();
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
-
-app.get('/hello', (req, res) => {
-    res.send(process.env.KNOW_VALUE);
-})
-
 const port = process.env.PORT || 8080;
+
+app.get('*', (req, res) => {
+    res.status(404).send({message: 'Page not exists'});
+})
 
 app.listen(port, () => {
     console.log('listening on port ' + port);
