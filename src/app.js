@@ -7,10 +7,10 @@ const app = express();
 
 const authRoutes = require('./routes/auth-routes/auth-routes');
 
-app.set(bodyParser.urlencoded({ extended: true }));
-
-app.use(morgan());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cors());
+app.use(morgan());
 
 app.use(authRoutes);
 
