@@ -5,23 +5,26 @@ const { addSchemas } = require('./lib/schema-validation');
 
 async function start(){
     if(process.env.NODE_ENV === 'production') {
-        if(!process.env.MONGODB_URI){
+        if(!process.env.MONGODB_URI) {
             throw new Error('MONGODB_URI must be defined');
         }
-    }
-    await addSchemas();
-    console.log('All schema added successfully');
-    db.initDb((err,db) => {
-        if(err) {
-            throw new Error('Database connection failed');
-        }else{
-            console.log('Database connection established successfully');
-            app.listen(port, () => {
-                console.log('Listening on port ' + port);
-                //console.clear();
-            });
+        if(!process.env.JWT_SECRET) {
+            throw new Error('JWT_SECRET must be defined');
         }
-    });
+    }
+    try {
+
+        await addSchemas();
+        await db.initDb();
+        app.listen(port);
+        
+    
+    }catch(err) {
+        
+        console.log(err);
+        throw new Error('Internal Server Error');
+    
+    }
 }
 
 start();
