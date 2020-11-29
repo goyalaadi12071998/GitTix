@@ -2,28 +2,7 @@ const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 let _db;
 
-const dbUrl = process.env.MONGODB_URI || "mongodb+srv://goyalaadesh461:11710461Aa@test.d3lnu.mongodb.net/gittixdb?retryWrites=true&w=majority";
-// function initDb(callback) {
-//     if(_db) {
-//         console.warn('Trying to init db again');
-//         return callback(null,_db);
-//     }
-
-//     MongoClient.connect(dbUrl,{useNewUrlParser: true, useUnifiedTopology: true}, connected);
-
-//     async function connected(err,client) {
-//         if(err) {
-//             console.log('Error connecting to database');
-//             console.log(err);
-//             return callback(err);
-//         }
-//         const db = {
-//             users: await client.db().collection('users')
-//         }
-//         _db = db
-//         return callback(null,_db);
-//     }   
-// }
+const dbUrl = process.env.MONGODB_URI;
 
 const initDb = async () => {
     if(_db){
@@ -32,12 +11,18 @@ const initDb = async () => {
     }
     try {
         const client = await MongoClient.connect(dbUrl,{useNewUrlParser: true,useUnifiedTopology: true});
-        const db = {
-            users: await client.db().collection('users'),
-            blogs: await client.db().collection('blogs')
+        if(client) {
+            console.log('Database initialized successfully');
+            const db = {
+                users: await client.db().collection('users'),
+                blogs: await client.db().collection('blogs')
+            }
+            await db.users.createIndex({email: 1});
+            _db = db;
+            return _db;
+        }else{
+            throw new Error('Database connection failed');
         }
-        _db = db;
-        return _db;
     }catch(err) {
         console.log(err);
         throw new Error('Database connection failed');

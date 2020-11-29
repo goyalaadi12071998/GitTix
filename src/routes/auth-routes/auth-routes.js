@@ -5,6 +5,8 @@ const { getDb } = require('../../config/db/db');
 const { validateJson } = require('../../lib/schema-validation');
 const rateLimit = require('express-rate-limit');
 const jwt = require('jsonwebtoken');
+const { isAuthenticated, isAdmin } = require('../../middlewares/isAuthenticated');
+const ObjectId = require("mongodb").ObjectID;
 
 const apiRequestLimit = rateLimit({
     windowMs: 300000, //5 minutes
@@ -83,7 +85,7 @@ router.post('/api/users/signin', async (req, res) => {
         }
 
         //Generate jsonwebtoken
-        const token = await jwt.sign({id: user.id},process.env.JWT_SECRET);
+        const token = await jwt.sign({id: user._id},process.env.JWT_SECRET);
         
         //Set token into session
         req.session = { token: token, userPresent: true };
@@ -97,6 +99,12 @@ router.post('/api/users/signin', async (req, res) => {
         res.status(500).json({message: 'Internal Server Error during login'});
         return;
     }
+});
+
+router.post('/api/users/logout', async (req, res) => {
+    req.session = null;
+    res.status(200).json({message: 'Sign out successfully'});
+    return;
 });
 
 module.exports = router;

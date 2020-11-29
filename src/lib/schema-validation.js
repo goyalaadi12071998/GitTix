@@ -6,9 +6,7 @@ const fs = require('fs');
 const ajv = new Ajv({allErrors: true, jsonPointers: true, nullable: true});
 
 const addSchemas = async () => {
-    console.log(path.join(__dirname, '/schemas/*.json'));
     const schemaFiles = await glob.sync(path.join(__dirname, '/schemas/*.json'));
-    console.log('From Schema files',schemaFiles);
     schemaFiles.forEach(file => {
         const fileData = JSON.parse(fs.readFileSync(file,'utf-8'));
         ajv.addSchema(fileData,path.basename(file,'.json'));

@@ -13,17 +13,15 @@ async function start(){
         }
     }
     try {
-
         await addSchemas();
         await db.initDb();
-        app.listen(port);
-        
-    
+        app.listen(port, () => {
+            console.log('Server listening on port ' + port);
+        });
+
     }catch(err) {
-        
         console.log(err);
         throw new Error('Internal Server Error');
-    
     }
 }
 
