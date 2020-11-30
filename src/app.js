@@ -43,4 +43,9 @@ if(nodeVersionMajor < 12){
 app.use(authRoutes);
 app.use(userRoutes);
 
+
+app.use('*', (req, res) => {
+    res.status(500).json({ message: 'No page with this request'});
+});
+
 module.exports = app;
