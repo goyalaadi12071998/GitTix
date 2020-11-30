@@ -17,11 +17,6 @@ const initDb = async () => {
                 users: await client.db().collection('users'),
                 blogs: await client.db().collection('blogs')
             }
-            console.log("Creating indexs on database collections");
-            await db.users.createIndex({email: 1});
-            await db.blogs.createIndex({title: 1});
-            await db.blogs.createIndex({author: 1});
-            await db.blogs.createIndex({title: 1, author:1});
             _db = db;
             return _db;
         }else{

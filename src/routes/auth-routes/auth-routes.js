@@ -7,7 +7,7 @@ const rateLimit = require('express-rate-limit');
 const jwt = require('jsonwebtoken');
 const randToken = require('rand-token');
 const { sendEmail }= require('../../lib/email');
-const { getConfig, clearUser } = require('../../lib/config');
+const { getConfig, clearUser } = require('../../lib/common');
 
 const apiRequestLimit = rateLimit({
     windowMs: 300000, //5 minutes

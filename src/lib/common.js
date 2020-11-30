@@ -1,8 +1,9 @@
 const clearUser = (req) => {
+    req.session.userPresent = null;
+    req.session.userEmail = null;
     req.session = null;
-    req.userPresent = null;
-    req.userEmail = null;
+    req.currentUser = null;
     return;
 }
 
-module.exports = { clearUser };
+module.exports = { clearUser }; 

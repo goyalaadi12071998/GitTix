@@ -16,12 +16,12 @@ const getConfig = () => {
     }
 
     // //Override from .env file
-    // console.log('From Object keys',Object.keys(config));
-    // Object.keys(config).forEach((configkey) => {
-    //     if(process.env[configkey]){
-    //         config[configkey] = process.env[configkey];
-    //     }
-    // });
+    console.log('From Object keys',Object.keys(config));
+    Object.keys(config).forEach((configkey) => {
+        if(process.env[configkey]){
+            config[configkey] = process.env[configkey];
+        }
+    });
 
     return config;
 

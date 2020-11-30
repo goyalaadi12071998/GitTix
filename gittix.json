@@ -1,0 +1,13 @@
+{
+    "name": "GitTix",
+    "description": "A fully functional ready to integrate backend for a blogging application",
+    "repository": "https://github.com/goyalaadi121998/GitTix",
+    "keywords": [
+        "Blogging",
+        "express",
+        "mongodb",
+        "node.js",
+        "blogs",
+        "sendgrid"
+    ]
+}

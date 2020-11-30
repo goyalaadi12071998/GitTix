@@ -1,8 +1,6 @@
 {
     "title": "GitTix",
     "emailUser": "goyalaadesh462@gmail.com",
-    "emailHost": "smtp-mail.outlook.com",
-    "emailPort": 587,
-    "emailSecure": false,
-    "baseUrl": "http://localhost:8080"
+    "baseUrl": "http://localhost:8080",
+    "profileImageDefault": "https://i.pinimg.com/564x/bc/d4/ac/bcd4ac32cc7d3f98b5e54bde37d6b09e.jpg"
 }
