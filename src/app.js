@@ -48,9 +48,19 @@ if(nodeVersionMajor < 12){
     process.exit(2);
 }
 
-app.get('*',(req, res, next) => {
+function ensureSecure(req, res, next) {
+    //Heroku stores the origin protocol in a header variable. The app itself is isolated within the dyno and all request objects have an HTTP protocol.
+    if (req.get('X-Forwarded-Proto')=='https' || req.hostname == 'localhost') {
+        //Serve Angular App by passing control to the next middleware
+        next();
+    } else if(req.get('X-Forwarded-Proto')!='https' && req.get('X-Forwarded-Port')!='443'){
+        //Redirect if not HTTP with original request URL
+        res.redirect('https://' + req.hostname + req.url);
+    }
+}
 
-    res.redirect('https://'+req.headers.host+req.url);
+app.get('*',(req, res, next) => {
+    ensureSecure(req, res, next);
 });
 
 app.use(authRoutes);
