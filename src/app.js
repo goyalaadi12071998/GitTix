@@ -17,12 +17,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(morgan());
+
 app.use(cookieSession({    
     name: 'session',
     resave: true,
     saveUninitialized: false,
     secret: process.env.JWT_SECRET,
     keys: [process.env.JWT_SECRET]
+}));
+
+app.use(cookieSession({
+    secret: process.env.JWT_SECRET,
+    httpOnly: true,
+    secure: true
 }));
 
 app.use(helmet());
@@ -41,10 +48,14 @@ if(nodeVersionMajor < 12){
     process.exit(2);
 }
 
+app.get('*',(req, res, next) => {
+
+    res.redirect('https://'+req.headers.host+req.url);
+});
+
 app.use(authRoutes);
 app.use(userRoutes);
 app.use(blogRoutes);
-
 
 app.use('*', (req, res) => {
     res.status(500).json({ message: 'No page with this request'});
