@@ -11,6 +11,7 @@ dotenv.config();
 
 const authRoutes = require('./routes/auth-routes/auth-routes');
 const userRoutes = require('./routes/user-routes/user-routes');
+const blogRoutes = require('./routes/blog-routes/blog-routes');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -42,6 +43,7 @@ if(nodeVersionMajor < 12){
 
 app.use(authRoutes);
 app.use(userRoutes);
+app.use(blogRoutes);
 
 
 app.use('*', (req, res) => {
