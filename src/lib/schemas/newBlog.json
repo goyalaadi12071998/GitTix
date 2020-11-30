@@ -1,0 +1,41 @@
+{
+    "$id": "newBlog",
+    "type": "object",
+    "properties": {
+        "title": {
+            "type": "string",
+            "isNotEmpty": true
+        },
+        "content": {
+            "type": "object",
+            "properties": {
+                "blogImage": {
+                    "type": "string",
+                    "isNotEmpty": true
+                },
+                "blogContent": {
+                    "type": "string",
+                    "isNotEmpty": true
+                }
+            },
+            "isNotEmpty": true
+        },
+        "author": {
+            "type": "string",
+            "format": "obejctid",
+            "isNotEmpty": true
+        }
+    },
+    "errorMessage": {
+        "properties": {
+            "title": "Blog tile should not be empty",
+            "content": "Blog content should not be empty",
+            "author": "Blog author should not be unknown"
+        }
+    },
+    "required": [
+        "title",
+        "content",
+        "author"
+    ]
+}

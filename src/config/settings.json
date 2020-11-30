@@ -1,0 +1,8 @@
+{
+    "title": "GitTix",
+    "emailUser": "goyalaadesh462@gmail.com",
+    "emailHost": "smtp-mail.outlook.com",
+    "emailPort": 587,
+    "emailSecure": false,
+    "baseUrl": "http://localhost:8080"
+}

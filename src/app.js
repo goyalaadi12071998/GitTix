@@ -25,6 +25,6 @@ app.use(cookieSession({
 }));
 
 app.use(authRoutes);
-//app.use(userRoutes);
+app.use(userRoutes);
 
 module.exports = app;
