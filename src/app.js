@@ -6,6 +6,7 @@ const cors = require('cors');
 const app = express();
 const dotenv = require('dotenv');
 const helmet = require('helmet');
+const { ensureSecure } = require('./lib/common');
 
 dotenv.config();
 
@@ -33,6 +34,7 @@ app.use(cookieSession({
 }));
 
 app.use(helmet());
+
 console.log('Setting up access contol of application ...');
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080/', 'https://pure-journey-50523.herokuapp.com/');
@@ -46,17 +48,6 @@ const nodeVersionMajor = parseInt(process.version.split('.')[0].replace('v', '')
 if(nodeVersionMajor < 12){
     console.log(`Please use Node.js version 12.x or above. Current version: ${nodeVersionMajor}`);
     process.exit(2);
-}
-
-function ensureSecure(req, res, next) {
-    //Heroku stores the origin protocol in a header variable. The app itself is isolated within the dyno and all request objects have an HTTP protocol.
-    if (req.get('X-Forwarded-Proto')=='https' || req.hostname == 'localhost') {
-        //Serve Node.js App by passing control to the next middleware
-        next();
-    } else if(req.get('X-Forwarded-Proto')!='https' && req.get('X-Forwarded-Port')!='443'){
-        //Redirect if not HTTP with original request URL
-        res.redirect('https://' + req.hostname + req.url);
-    }
 }
 
 app.get('*',(req, res, next) => {
