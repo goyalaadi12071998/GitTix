@@ -13,7 +13,7 @@ const addSchemas = async () => {
     });
 
     const emailRegex = /^([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-    ajv.addFormat('email', emailRegex);
+    ajv.addFormat('emailAddress', emailRegex);
 
     ajv.addFormat('objectid', {
         validate: (objId) => {

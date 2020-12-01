@@ -1,3 +1,5 @@
+const { ObjectId } = require("mongodb");
+
 const clearUser = (req) => {
     req.session.userPresent = null;
     req.session.userEmail = null;
@@ -17,5 +19,12 @@ const ensureSecure = (req, res, next) => {
     }
 }
 
+const getId = (id) => {
+    if(id.length !== 24) {
+        return id;
+    }
+    return ObjectId(id);
+}
 
-module.exports = { clearUser, ensureSecure }; 
+
+module.exports = { clearUser, ensureSecure, getId }; 

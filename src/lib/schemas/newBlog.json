@@ -22,7 +22,7 @@
         },
         "author": {
             "type": "string",
-            "format": "obejctid",
+            "format": "objectid",
             "isNotEmpty": true
         }
     },
