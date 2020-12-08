@@ -20,6 +20,10 @@ const isAuthenticated = async (req, res, next) => {
 }
 
 const isAdmin = async (req, res, next) => {
+    if(!req.currentUser || req.currentUser === null) {
+        isAuthenticated(req, res, next);
+        next();
+    }
     if(!req.currentUser.isAdmin) {
         res.status(400).json({message: 'Access denied, Admin access only'});
     }

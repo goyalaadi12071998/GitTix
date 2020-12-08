@@ -1,5 +1,5 @@
 const app = require('./app');
-const port = process.env.PORT || 8080;
+const port =  [8080,8081,8082];
 const db = require('./config/db/db');
 const { addSchemas } = require('./lib/schema-validation');
 const { runIndex } = require('./lib/indexing');
@@ -27,9 +27,7 @@ async function start(){
         }
         await addSchemas();
         try {
-            app.listen(port, () => {
-                console.log('Server listening on port ' + port);
-            });
+            port.forEach(port => app.listen(port, () => console.log('Server listening on port', port)));
         }catch(err) {
             console.error('Error starting gittix server',err);
             process.exit(2);
